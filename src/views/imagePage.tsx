@@ -25,19 +25,19 @@ const ImagePage = (props: Props) => {
   };
 
   useEffect(() => {
-    axios
-      .get(`https://images-api.nasa.gov/asset/${nasa_id}`)
-      .then((response) => {
-        console.log(response);
-        // fetch metadata from the remote location
-        fetchMetaData(
-          // metadata link is always last in the items array
-          response.data.collection.items[
-            response.data.collection.items.length - 1
-          ].href
-        );
-        setImage(response.data.collection.items[1].href);
-      });
+    const getImages = async () => {
+      const result = await axios.get(
+        `https://images-api.nasa.gov/asset/${nasa_id}`
+      );
+      // fetch metadata from the remote location
+      fetchMetaData(
+        // metadata link is always last in the items array
+        result.data.collection.items[result.data.collection.items.length - 1]
+          .href
+      );
+      setImage(result.data.collection.items[1].href);
+    };
+    getImages();
   }, []);
 
   return (
