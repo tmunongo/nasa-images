@@ -27,7 +27,7 @@ const ImagePage = (props: Props) => {
   useEffect(() => {
     const getImages = async () => {
       const result = await axios.get(
-        `https://images-api.nasa.gov/asset/${nasa_id}`
+        `http://images-api.nasa.gov/asset/${nasa_id}`
       );
       // fetch metadata from the remote location
       fetchMetaData(

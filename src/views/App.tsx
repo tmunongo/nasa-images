@@ -53,7 +53,7 @@ function App() {
     }
     // make axios request
     axios
-      .get("https://images-api.nasa.gov/search", {
+      .get("http://images-api.nasa.gov/search", {
         // add params, some are optional
         params: {
           q: search.searchTerm,
