@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 type Props = {};
 
-const SearchPage = (props: Props) => {
+const ImagePage = (props: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { nasa_id } = useParams();
@@ -28,6 +28,7 @@ const SearchPage = (props: Props) => {
     axios
       .get(`https://images-api.nasa.gov/asset/${nasa_id}`)
       .then((response) => {
+        console.log(response);
         // fetch metadata from the remote location
         fetchMetaData(
           // metadata link is always last in the items array
@@ -35,51 +36,62 @@ const SearchPage = (props: Props) => {
             response.data.collection.items.length - 1
           ].href
         );
-        setImage(response.data.collection.items[0].href);
+        setImage(response.data.collection.items[1].href);
       });
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen w-full bg-[#EFEBE7] p-2">
+    <div className="flex flex-col items-center justify-start min-h-screen w-full bg-[#EFEBE7] p-2 text-black">
       {/* Use dot bracket notation */}
+      <div className="w-full flex items-center justify-start">
+        <button
+          className="flex items-center justify-around bg-[#E7E0DA]"
+          onClick={() => handleGoBack()}
+        >
+          <BsArrowLeft size={22} />
+          <span className="m-1">Back</span>
+        </button>
+      </div>
       {metadata ? (
-        <div>
-          <button
-            className="flex items-center justify-around bg-[#D2BF55]"
-            onClick={() => handleGoBack()}
-          >
-            <BsArrowLeft size={22} />
-            <span className="m-1">Back</span>
-          </button>
-          <h1 className="font-bold text-gray-800 text-center">
+        <div className="border border-black rounded-lg p-2 m-2">
+          <h1 className="bg-[#E7E0DA] text-2xl md:text-3xl font-bold text-gray-800 text-center shadow-inner rounded-md p-2 m-2">
             {metadata!["AVAIL:Title"]}
           </h1>
           <div className="flex items-center justify-center">
             <img
               src={image}
               alt={metadata!["AVAIL:Title"]}
-              className="rounded-md"
+              className="rounded-md p-2 md:p-4"
             />
           </div>
-          <div className="max-w-6xl px-4 sm:p-6 lg:p-8 border border-black m-2 md:m-4">
-            <h2>Details</h2>
+          <div className="max-w-6xl px-4 sm:p-6 lg:p-8 border border-black rounded-md shadow-lg m-2 md:m-4 italic ">
+            <h2 className="underline">Details</h2>
             <p className="text-gray-600">
               <span className="font-bold">Location:</span>{" "}
-              {metadata!["AVAIL:Location"]}
+              {metadata!["AVAIL:Location"]
+                ? metadata!["AVAIL:Location"]
+                : "N/A"}
             </p>
             <p className="text-gray-600">
-              Photographer: {metadata!["XMP:Credit"]}
+              <span className="font-bold">Photographer:</span>{" "}
+              {metadata!["AVAIL:Photographer"]
+                ? metadata!["AVAIL:Photographer"]
+                : "N/A"}
             </p>
             <p className="text-gray-600">
-              Description: {metadata!["AVAIL:Description"]}
+              <span className="font-bold">Description:</span>{" "}
+              {metadata!["AVAIL:Description"]}
             </p>
             <p className="text-gray-600">
-              Keywords:{" "}
+              <span className="font-bold">Keywords:</span>{" "}
               {metadata!["IPTC:Keywords"] &&
                 metadata!["IPTC:Keywords"].join(", ")}
             </p>
             <p className="text-gray-600">
-              Date: {metadata!["EXIF:CreateDate"]}
+              <span className="font-bold">Date:</span>{" "}
+              {metadata!["EXIF:CreateDate"]
+                ? metadata!["EXIF:CreateDate"]
+                : "N/A"}
             </p>
           </div>
         </div>
@@ -92,4 +104,4 @@ const SearchPage = (props: Props) => {
   );
 };
 
-export default SearchPage;
+export default ImagePage;

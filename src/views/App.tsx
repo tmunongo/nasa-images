@@ -44,8 +44,13 @@ function App() {
     event.preventDefault();
     // start loading
     setLoading(true);
-    // clear any previous search results
+    // clear any previous search results and error messages
     setImages([]);
+    setErrorMessage("");
+    // check that start date is before end date
+    if (parseInt(search.startDate!, 10) > parseInt(search.endDate!, 10)) {
+      setErrorMessage("Start date must be before end date!");
+    }
     // make axios request
     axios
       .get("https://images-api.nasa.gov/search", {
@@ -60,6 +65,7 @@ function App() {
       })
       .then((response) => {
         if (response.status === 200) {
+          console.log(response.data.collection.items);
           setImages(response.data.collection.items);
           setLoading(false);
         }
@@ -79,9 +85,13 @@ function App() {
           </span>
           <h1>Welcome Space Lover</h1>
         </div>
-        <div>
+        <div className="w-full">
+          <p className="italic mt-2">
+            Enter a search term below. Select your start and end dates and click
+            'Search'
+          </p>
           <form
-            className="flex flex-col md:flex-row items-center justify-around p-4 border rounded-md shadow-lg w-full m-2"
+            className="flex flex-col md:flex-row items-center justify-around p-4 border rounded-md shadow-lg w-full my-4"
             onSubmit={(event) => handleSubmit(event)}
           >
             <div className="flex items-center justify-center">
@@ -136,23 +146,29 @@ function App() {
               defaultValue={search.mediaType}
               id="mediaType"
             />
-            <div className="my-2 md:my-0">
+            <div className="my-2 md:my-0 cursor-pointer">
               <span className="p-2 md:p-3 bg-[#78BC61] text-black  text-center text-lg rounded-md md:m-0">
-                <input type="submit" value="Search" />
+                <input
+                  type="submit"
+                  value="Search"
+                  className="cursor-pointer"
+                />
               </span>
             </div>
           </form>
           {errorMessage && (
             <div className="my-2 bg-red-300 rounded-md">
-              <p className="text-gray-800">{errorMessage}</p>
+              <p id="error-message" className="text-gray-800">
+                {errorMessage}
+              </p>
             </div>
           )}
         </div>
       </div>
       <Line />
       {/* Search results section */}
-      <div id="searchResults" className="p-2">
-        <h1>Results</h1>
+      <div id="searchResults" className="p-2 text-black">
+        <h2>Results</h2>
         {loading && <div>Loading...</div>}
         <div>
           {images && (

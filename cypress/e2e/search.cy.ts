@@ -18,6 +18,6 @@ describe("My First Test", () => {
     cy.contains("Search").click();
 
     // find a specific search result
-    cy.get("a#link-3").should("exist");
+    cy.get("a#link-0").should("exist");
   });
 });

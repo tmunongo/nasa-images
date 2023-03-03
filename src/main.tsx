@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./views/App";
-import SearchPage from "./views/searchPage";
+import ImagePage from "./views/imagePage";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/image/:nasa_id",
-    element: <SearchPage />,
+    element: <ImagePage />,
   },
 ]);
 

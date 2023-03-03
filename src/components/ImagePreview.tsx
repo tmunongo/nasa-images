@@ -8,12 +8,21 @@ const ImagePreview = ({ image }: Props) => {
       <div className="flex flex-col items-center justify-center border p-2 rounded-md shadow-md h-80">
         <div className="overflow-hidden">
           <img
-            src={`https://images-assets.nasa.gov/image/${image.data[0].nasa_id}/${image.data[0].nasa_id}~orig.jpg`}
+            src={image.links[0].href}
             alt={image.data[0].title}
             className="w-full rounded-md hover:scale-105 transition-all duration-500"
           />
         </div>
-        <p>{image.data[0].title}</p>
+        <div className="text-start">
+          <p>Title: {image.data[0].title}</p>
+          <p>
+            Location: {image.data[0].location ? image.data[0].location : "N/A"}
+          </p>
+          <p>
+            Photographer:{" "}
+            {image.data[0].photographer ? image.data[0].photographer : "N/A"}
+          </p>
+        </div>
         <a id={`link-${image}`} href={`/image/${image.data[0].nasa_id}`}>
           Details
         </a>
