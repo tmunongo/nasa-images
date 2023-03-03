@@ -1,7 +1,7 @@
 /// <reference types="Cypress" />
 
-describe("My First Test", () => {
-  it("Visits the search page", () => {
+describe("Check that the search function works", () => {
+  it("Visits the search page and attempts a search", () => {
     cy.visit(Cypress.env("baseUrl"));
 
     // enter search query
@@ -15,7 +15,7 @@ describe("My First Test", () => {
     cy.get("#endDate").should("have.value", "2022");
 
     // Search
-    cy.contains("Search").click();
+    cy.get("input:submit").click();
 
     // find a specific search result
     cy.get("a#link-0").should("exist");

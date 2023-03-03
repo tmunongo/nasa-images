@@ -84,7 +84,7 @@ function App() {
           <h1>Welcome Space Lover</h1>
         </div>
         <div className="w-full">
-          <p className="italic mt-2">
+          <p className="italic mt-2 text-black">
             Enter a search term below. Select your start and end dates and click
             'Search'
           </p>
@@ -179,7 +179,7 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {images ? (
               images.map((item, index) => {
-                return <ImagePreview key={index} image={item} />;
+                return <ImagePreview key={index} image={item} idx={index} />;
               })
             ) : (
               <div></div>

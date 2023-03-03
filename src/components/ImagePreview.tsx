@@ -1,8 +1,9 @@
 type Props = {
   image: any;
+  idx: number;
 };
 
-const ImagePreview = ({ image }: Props) => {
+const ImagePreview = ({ image, idx }: Props) => {
   return (
     <div className="block m-auto w-full">
       <div className="flex flex-col items-center justify-center border p-2 rounded-md shadow-md h-96">
@@ -23,7 +24,7 @@ const ImagePreview = ({ image }: Props) => {
             {image.data[0].photographer ? image.data[0].photographer : "N/A"}
           </p>
         </div>
-        <a id={`link-${image}`} href={`/image/${image.data[0].nasa_id}`}>
+        <a id={`link-${idx}`} href={`/image/${image.data[0].nasa_id}`}>
           Details
         </a>
       </div>

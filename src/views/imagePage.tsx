@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsArrowLeft } from "react-icons/bs";
+import { useQuery } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 type Props = {};
@@ -25,22 +26,19 @@ const ImagePage = (props: Props) => {
     });
   };
 
-  useEffect(() => {
-    const getImages = async () => {
-      const result = await axios.get(
-        `https://images-api.nasa.gov/asset/${nasa_id}`
-      );
-      console.log(result.data);
-      // fetch metadata from the remote location
-      fetchMetaData(
-        // metadata link is always last in the items array
-        result.data.collection.items[result.data.collection.items.length - 1]
-          .href
-      );
-      setImage(result.data.collection.items[1].href);
-    };
-    getImages();
-  }, []);
+  const { isLoading, error, data } = useQuery("imageData", async () => {
+    const result = await axios
+      .get(`https://images-api.nasa.gov/asset/${nasa_id}`)
+      .then((res) => {
+        return res;
+      });
+    // fetch metadata from the remote location
+    fetchMetaData(
+      // metadata link is always last in the items array
+      result.data.collection.items[result.data.collection.items.length - 1].href
+    );
+    setImage(result.data.collection.items[1].href);
+  });
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen w-full bg-[#EFEBE7] p-2 text-black">
@@ -66,7 +64,7 @@ const ImagePage = (props: Props) => {
               className="rounded-md p-2 md:p-4"
             />
           </div>
-          <div className="max-w-6xl px-4 sm:p-6 lg:p-8 border border-black rounded-md shadow-lg m-2 md:m-4 italic ">
+          <div className="max-w-6xl px-4 sm:p-6 lg:p-8 border border-black rounded-md shadow-lg m-2 md:m-auto italic ">
             <h2 className="underline">Details</h2>
             <p className="text-gray-600">
               <span className="font-bold">Location:</span>{" "}
