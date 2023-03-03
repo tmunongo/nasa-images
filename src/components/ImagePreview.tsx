@@ -5,7 +5,7 @@ type Props = {
 const ImagePreview = ({ image }: Props) => {
   return (
     <div className="block m-auto w-full">
-      <div className="flex flex-col items-center justify-center border p-2 rounded-md shadow-md h-80">
+      <div className="flex flex-col items-center justify-center border p-2 rounded-md shadow-md h-96">
         <div className="overflow-hidden">
           <img
             src={image.links[0].href}
