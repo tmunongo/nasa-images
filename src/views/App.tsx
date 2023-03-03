@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ReactElement, useState } from "react";
 import { SiNasa } from "react-icons/si";
+import Typewriter from "typewriter-effect";
 import ImagePreview from "../components/ImagePreview";
 import Line from "../components/Line";
 
@@ -81,7 +82,18 @@ function App() {
           <span>
             <SiNasa size={100} />
           </span>
-          <h1>Welcome Space Lover</h1>
+          <h1>
+            Welcome,
+            <span className="text-[#fff]">
+              <Typewriter
+                options={{
+                  strings: ["Stargazer", "Explorer", "Seeker"],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </span>
+          </h1>
         </div>
         <div className="w-full">
           <p className="italic mt-2 text-black">
@@ -145,7 +157,7 @@ function App() {
               id="mediaType"
             />
             <div className="my-2 md:my-0 cursor-pointer">
-              <span className="p-2 md:p-3 bg-[#78BC61] text-black  text-center text-lg rounded-md md:m-0">
+              <span className="p-2 md:p-3 bg-[#001829] text-white  text-center text-lg rounded-md md:m-0">
                 <input
                   type="submit"
                   value="Search"

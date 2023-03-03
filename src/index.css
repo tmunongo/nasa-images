@@ -15,8 +15,8 @@ h3 {
 }
 
 #hero {
-  background-image: url("assets/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg");
-  background-position: center;
+  background-image: url("assets/images/symbol-scatter-haikei.svg");
+  background-position: unset;
   border-radius: 0.375rem;
   color: white;
   height: 50vh;
