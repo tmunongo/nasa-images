@@ -13,7 +13,8 @@ const ImagePage = (props: Props) => {
   const [metadata, setMetaData] = useState<any>();
 
   const fetchMetaData = async (location: string) => {
-    const result = await axios.get(`${location}`);
+    const secure_location = "https://" + location.substring(7, location.length);
+    const result = await axios.get(`${secure_location}`);
     setMetaData(result.data);
   };
 
@@ -27,8 +28,9 @@ const ImagePage = (props: Props) => {
   useEffect(() => {
     const getImages = async () => {
       const result = await axios.get(
-        `http://images-api.nasa.gov/asset/${nasa_id}`
+        `https://images-api.nasa.gov/asset/${nasa_id}`
       );
+      console.log(result.data);
       // fetch metadata from the remote location
       fetchMetaData(
         // metadata link is always last in the items array

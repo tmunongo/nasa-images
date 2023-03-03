@@ -33,7 +33,6 @@ function App() {
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault();
-    console.log(event.target.value);
     setSearch((prevSearchValues) => ({
       ...prevSearchValues,
       [event.target.name]: event.target.value,
@@ -53,7 +52,7 @@ function App() {
     }
     // make axios request
     axios
-      .get("http://images-api.nasa.gov/search", {
+      .get("https://images-api.nasa.gov/search", {
         // add params, some are optional
         params: {
           q: search.searchTerm,
@@ -65,7 +64,6 @@ function App() {
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data.collection.items);
           setImages(response.data.collection.items);
           setLoading(false);
         }
