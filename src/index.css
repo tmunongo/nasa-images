@@ -1,11 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+#hero {
+  background-image: url("assets/images/kai-pilger-Ef6iL87-vOA-unsplash.jpg");
+  background-position: center;
+  border-radius: 0.375rem;
+  color: white;
+  height: 50vh;
+  padding: 8px;
+  width: 80vw;
+  @media (max-width: 768px) {
+  }
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background: #283d52;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

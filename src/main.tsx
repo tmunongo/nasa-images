@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/results",
+    path: "/image/:nasa_id",
     element: <SearchPage />,
   },
 ]);
